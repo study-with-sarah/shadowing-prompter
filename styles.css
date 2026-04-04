@@ -1,0 +1,172 @@
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  background-color: #ffffff;
+  color: #333333;
+  margin: 0;
+  padding: 104px 20px 150px 20px; /* top: room for fixed nav + player bar */
+}
+
+/* 固定顶栏容器 */
+#episode-nav,
+#audio-player {
+  position: fixed;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  padding: 10px 20px;
+  z-index: 100;
+}
+
+/* 导航栏 */
+#episode-nav {
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* 音频播放器 */
+#audio-player {
+  top: 56px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #f0f0f0;
+}
+#play-btn {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 8px;
+  background: transparent;
+  color: #555;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+#play-btn:hover {
+  border-color: #888;
+  color: #111;
+}
+#audio-time {
+  font-size: 13px;
+  color: #999;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+#audio-seek {
+  flex: 1;
+  accent-color: #555;
+  cursor: pointer;
+}
+#prev-btn,
+#next-btn {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 8px;
+  background: transparent;
+  color: #555;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+#prev-btn:hover,
+#next-btn:hover {
+  border-color: #888;
+  color: #111;
+}
+#prev-btn:disabled,
+#next-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+#ep-select {
+  flex: 1;
+  height: 36px;
+  padding: 0 10px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 8px;
+  background: transparent;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+}
+#ep-select:focus {
+  outline: none;
+  border-color: #888;
+}
+
+/* 集标题 */
+#episode-header {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+.ep-theme {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.ep-source {
+  font-size: 13px;
+  color: #999;
+}
+.line-container {
+  margin-bottom: 24px;
+  padding: 16px;
+  border-radius: 12px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  /* 初始状态无背景框 */
+  background-color: transparent;
+}
+.line-container.active {
+  /* 点击后出现透明灰框 */
+  background-color: #f5f5f7;
+}
+.text-en {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.text-zh {
+  font-size: 16px;
+  color: #666666;
+  line-height: 1.4;
+}
+/* 初始状态隐藏高亮，显示纯黑文字 */
+.highlight {
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+/* 默认状态下文字颜色继承，不显示高亮 */
+.text-en span,
+.text-zh span {
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+/* 点击 active 后的对应颜色 */
+.active .hl-blue {
+  color: #3b82f6;
+  font-weight: bold;
+}
+.active .hl-green {
+  color: #10b981;
+  font-weight: bold;
+}
+.active .hl-orange {
+  color: #f59e0b;
+  font-weight: bold;
+}
+.active .hl-purple {
+  color: #8b5cf6;
+  font-weight: bold;
+}
