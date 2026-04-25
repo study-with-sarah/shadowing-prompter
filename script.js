@@ -79,7 +79,9 @@ fetch("data.json")
     modeBar.querySelectorAll(".mode-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
         currentMode = btn.dataset.mode;
-        modeBar.querySelectorAll(".mode-btn").forEach((b) => b.classList.remove("active"));
+        modeBar
+          .querySelectorAll(".mode-btn")
+          .forEach((b) => b.classList.remove("active"));
         btn.classList.add("active");
         renderContent(data[currentIndex]);
       });
@@ -155,9 +157,6 @@ fetch("data.json")
             <div class="text-en">${clean(line.en)}</div>
             <div class="text-zh">${clean(line.zh)}</div>
           `;
-          container.addEventListener("click", () =>
-            container.classList.toggle("active"),
-          );
           contentDiv.appendChild(container);
         });
       } else if (currentMode === "paragraph") {

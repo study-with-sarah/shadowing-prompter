@@ -5,22 +5,26 @@
   right: 0;
   top: 100px; /* below nav (56px) + player (44px) */
   background-color: #ffffff;
-  padding: 8px 20px;
+  padding: 4px 20px;
   margin: 8px 0;
   border-bottom: 1px solid #f0f0f0;
   z-index: 100;
 }
 #mode-toggle {
   display: flex;
-  gap: 6px;
+  gap: 5px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
 }
 .mode-btn {
-  padding: 5px 14px;
+  padding: 4px 10px;
   border: 1.5px solid #d1d5db;
   border-radius: 20px;
   background: transparent;
   color: #555;
-  font-size: 13px;
+  font-size: 12px;
+  white-space: nowrap;
+  flex-shrink: 0;
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -35,19 +39,16 @@
 }
 
 /* ── Paragraph mode blocks ───────────────────────────── */
-.para-block {
-  padding: 8px 0;
-}
 .para-en {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
-  line-height: 1.7;
-  margin-bottom: 24px;
+  line-height: 1.6;
+  margin: 0 0 18px;
 }
 .para-zh {
   font-size: 16px;
   color: #666666;
-  line-height: 1.8;
+  line-height: 1.7;
 }
 
 /* Highlights always visible in paragraph / chinese-only modes */
@@ -75,7 +76,7 @@ body {
   background-color: #ffffff;
   color: #333333;
   margin: 0;
-  padding: 148px 20px 150px 20px; /* top: room for fixed nav + player bar + mode bar */
+  padding: 140px 20px 150px 20px; /* top: nav (56px) + player (44px) + mode bar (40px) */
 }
 
 /* 固定顶栏容器 */
@@ -174,11 +175,11 @@ body {
 
 /* 集标题 */
 #episode-header {
-  margin-top: 24px;
-  margin-bottom: 24px;
+  margin-top: 12px;
+  margin-bottom: 14px;
 }
 .ep-theme {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   margin-bottom: 4px;
 }
@@ -187,28 +188,20 @@ body {
   color: #999;
 }
 .line-container {
-  margin-bottom: 24px;
-  padding: 16px;
-  border-radius: 12px;
-  transition: background-color 0.3s ease;
+  margin-bottom: 8px;
+  padding-bottom: 14px;
   cursor: pointer;
-  /* 初始状态无背景框 */
-  background-color: transparent;
-}
-.line-container.active {
-  /* 点击后出现透明灰框 */
-  background-color: #f5f5f7;
 }
 .text-en {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   margin-bottom: 8px;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 .text-zh {
   font-size: 16px;
   color: #666666;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 /* 初始状态隐藏高亮，显示纯黑文字 */
 .highlight {
@@ -223,20 +216,20 @@ body {
   transition: color 0.3s ease;
 }
 
-/* 点击 active 后的对应颜色 */
-.active .hl-blue {
+/* Always visible highlights in line-by-line mode */
+.line-container .hl-blue {
   color: #3b82f6;
   font-weight: bold;
 }
-.active .hl-green {
+.line-container .hl-green {
   color: #10b981;
   font-weight: bold;
 }
-.active .hl-orange {
+.line-container .hl-orange {
   color: #f59e0b;
   font-weight: bold;
 }
-.active .hl-purple {
+.line-container .hl-purple {
   color: #8b5cf6;
   font-weight: bold;
 }
