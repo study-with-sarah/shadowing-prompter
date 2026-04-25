@@ -1,3 +1,73 @@
+/* ── Mode bar ───────────────────────────────────────── */
+#mode-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 100px; /* below nav (56px) + player (44px) */
+  background-color: #ffffff;
+  padding: 8px 20px;
+  margin: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+  z-index: 100;
+}
+#mode-toggle {
+  display: flex;
+  gap: 6px;
+}
+.mode-btn {
+  padding: 5px 14px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 20px;
+  background: transparent;
+  color: #555;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.mode-btn:hover {
+  border-color: #888;
+  color: #111;
+}
+.mode-btn.active {
+  background-color: #333;
+  border-color: #333;
+  color: #fff;
+}
+
+/* ── Paragraph mode blocks ───────────────────────────── */
+.para-block {
+  padding: 8px 0;
+}
+.para-en {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+.para-zh {
+  font-size: 16px;
+  color: #666666;
+  line-height: 1.8;
+}
+
+/* Highlights always visible in paragraph / chinese-only modes */
+.para-block .hl-blue {
+  color: #3b82f6;
+  font-weight: bold;
+}
+.para-block .hl-green {
+  color: #10b981;
+  font-weight: bold;
+}
+.para-block .hl-orange {
+  color: #f59e0b;
+  font-weight: bold;
+}
+.para-block .hl-purple {
+  color: #8b5cf6;
+  font-weight: bold;
+}
+
 body {
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
@@ -5,7 +75,7 @@ body {
   background-color: #ffffff;
   color: #333333;
   margin: 0;
-  padding: 104px 20px 150px 20px; /* top: room for fixed nav + player bar */
+  padding: 148px 20px 150px 20px; /* top: room for fixed nav + player bar + mode bar */
 }
 
 /* 固定顶栏容器 */

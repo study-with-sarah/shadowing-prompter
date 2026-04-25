@@ -62,6 +62,29 @@ fetch("data.json")
       playBtn.textContent = "▶";
     });
 
+    // ── Mode toggle ───────────────────────────────────────
+    let currentMode = "lines"; // 'lines' | 'paragraph' | 'chinese-only'
+
+    const modeBar = document.createElement("div");
+    modeBar.id = "mode-bar";
+    modeBar.innerHTML = `
+      <div id="mode-toggle">
+        <button class="mode-btn active" data-mode="lines">Line by Line</button>
+        <button class="mode-btn" data-mode="paragraph">Full Paragraph</button>
+        <button class="mode-btn" data-mode="chinese-only">Chinese Only</button>
+      </div>
+    `;
+    playerBar.insertAdjacentElement("afterend", modeBar);
+
+    modeBar.querySelectorAll(".mode-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        currentMode = btn.dataset.mode;
+        modeBar.querySelectorAll(".mode-btn").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        renderContent(data[currentIndex]);
+      });
+    });
+
     // ── Navigation ────────────────────────────────────────
     const prevBtn = document.createElement("button");
     prevBtn.id = "prev-btn";
@@ -118,20 +141,42 @@ fetch("data.json")
         <div class="ep-theme">${ep.theme}</div>
       `;
 
-      // 渲染台词行
+      renderContent(ep);
+    }
+
+    function renderContent(ep) {
       contentDiv.innerHTML = "";
-      ep.lines.forEach((line) => {
-        const container = document.createElement("div");
-        container.className = "line-container";
-        container.innerHTML = `
-          <div class="text-en">${clean(line.en)}</div>
-          <div class="text-zh">${clean(line.zh)}</div>
+
+      if (currentMode === "lines") {
+        ep.lines.forEach((line) => {
+          const container = document.createElement("div");
+          container.className = "line-container";
+          container.innerHTML = `
+            <div class="text-en">${clean(line.en)}</div>
+            <div class="text-zh">${clean(line.zh)}</div>
+          `;
+          container.addEventListener("click", () =>
+            container.classList.toggle("active"),
+          );
+          contentDiv.appendChild(container);
+        });
+      } else if (currentMode === "paragraph") {
+        const enText = ep.lines.map((l) => clean(l.en)).join(" ");
+        const zhText = ep.lines.map((l) => clean(l.zh)).join(" ");
+        contentDiv.innerHTML = `
+          <div class="para-block">
+            <p class="para-en">${enText}</p>
+            <p class="para-zh">${zhText}</p>
+          </div>
         `;
-        container.addEventListener("click", () =>
-          container.classList.toggle("active"),
-        );
-        contentDiv.appendChild(container);
-      });
+      } else if (currentMode === "chinese-only") {
+        const zhText = ep.lines.map((l) => clean(l.zh)).join(" ");
+        contentDiv.innerHTML = `
+          <div class="para-block">
+            <p class="para-zh">${zhText}</p>
+          </div>
+        `;
+      }
     }
 
     loadEpisode(0);
