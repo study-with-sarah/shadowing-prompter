@@ -76,7 +76,7 @@ fetch("data.json")
         <button class="mode-btn" data-mode="zh-only">ZH</button>
       </div>
     `;
-    playerBar.insertAdjacentElement("afterend", modeBar);
+    playerBar.insertAdjacentElement("beforebegin", modeBar);
 
     modeBar.querySelectorAll(".mode-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
