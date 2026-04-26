@@ -69,11 +69,11 @@ fetch("data.json")
     modeBar.id = "mode-bar";
     modeBar.innerHTML = `
       <div id="mode-toggle">
-        <button class="mode-btn active" data-mode="highlight-mode">Highlight Mode</button>
-        <button class="mode-btn" data-mode="shadow-mode">Shadow Mode</button>
-        <button class="mode-btn" data-mode="paragraph">Retell Mode</button>
-        <button class="mode-btn" data-mode="en-only">EN-only</button>
-        <button class="mode-btn" data-mode="zh-only">ZH-only</button>
+        <button class="mode-btn active" data-mode="highlight-mode">Highlight</button>
+        <button class="mode-btn" data-mode="shadow-mode">Shadow</button>
+        <button class="mode-btn" data-mode="paragraph">Retell</button>
+        <button class="mode-btn" data-mode="en-only">EN</button>
+        <button class="mode-btn" data-mode="zh-only">ZH</button>
       </div>
     `;
     playerBar.insertAdjacentElement("afterend", modeBar);
