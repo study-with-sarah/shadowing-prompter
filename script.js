@@ -141,8 +141,16 @@ fetch("data.json")
 
       // 渲染集标题
       header.innerHTML = `
-        <div class="ep-theme">${ep.theme}</div>
+        <div class="ep-header-wrapper">
+          <div class="ep-theme">${ep.theme}</div>
+          <button id="fullscreen-btn" class="fullscreen-btn">⛶</button>
+        </div>
       `;
+      document
+        .getElementById("fullscreen-btn")
+        .addEventListener("click", () => {
+          document.body.classList.toggle("fullscreen");
+        });
 
       renderContent(ep);
     }
