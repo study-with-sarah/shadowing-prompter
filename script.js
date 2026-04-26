@@ -63,7 +63,7 @@ fetch("data.json")
     });
 
     // ── Mode toggle ───────────────────────────────────────
-    let currentMode = "lines"; // 'lines' | 'paragraph'
+    let currentMode = "lines"; // 'lines' | 'paragraph' | 'en-only' | 'zh-only'
 
     const modeBar = document.createElement("div");
     modeBar.id = "mode-bar";
@@ -71,6 +71,8 @@ fetch("data.json")
       <div id="mode-toggle">
         <button class="mode-btn active" data-mode="lines">Shadow Mode</button>
         <button class="mode-btn" data-mode="paragraph">Retell Mode</button>
+        <button class="mode-btn" data-mode="en-only">EN-only</button>
+        <button class="mode-btn" data-mode="zh-only">ZH-only</button>
       </div>
     `;
     playerBar.insertAdjacentElement("afterend", modeBar);
@@ -165,6 +167,20 @@ fetch("data.json")
           <div class="para-block">
             <p class="para-zh">${zhText}</p>
             <p class="para-en">${enText}</p>
+          </div>
+        `;
+      } else if (currentMode === "en-only") {
+        const enText = ep.lines.map((l) => clean(l.en)).join(" ");
+        contentDiv.innerHTML = `
+          <div class="para-block">
+            <p class="para-en">${enText}</p>
+          </div>
+        `;
+      } else if (currentMode === "zh-only") {
+        const zhText = ep.lines.map((l) => clean(l.zh)).join(" ");
+        contentDiv.innerHTML = `
+          <div class="para-block">
+            <p class="para-zh">${zhText}</p>
           </div>
         `;
       }

@@ -4,12 +4,12 @@
 
 ### Features
 
-**Two viewing modes**
+**Four viewing modes**
 
-- Line by Line: sentence-by-sentence bilingual pairs
-- Full Paragraph: Chinese first, then English
-
-Why? Support both shadowing and retelling in a simpler flow.
+- Shadow Mode: sentence-by-sentence bilingual pairs
+- Retell Mode: Chinese first, then English
+- EN-only: English paragraph only
+- ZH-only: Chinese paragraph only
 
 ---
 
