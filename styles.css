@@ -262,20 +262,38 @@ body.fullscreen #mode-bar {
   transition: color 0.3s ease;
 }
 
-/* Always visible highlights in line-by-line mode */
-.line-container .hl-blue {
+/* Always visible highlights in highlight-mode */
+.line-mode-highlight .line-container .hl-blue {
   color: #3b82f6;
   font-weight: bold;
 }
-.line-container .hl-green {
+.line-mode-highlight .line-container .hl-green {
   color: #10b981;
   font-weight: bold;
 }
-.line-container .hl-orange {
+.line-mode-highlight .line-container .hl-orange {
   color: #f59e0b;
   font-weight: bold;
 }
-.line-container .hl-purple {
+.line-mode-highlight .line-container .hl-purple {
+  color: #8b5cf6;
+  font-weight: bold;
+}
+
+/* Tap-to-reveal highlights in shadow-mode */
+.line-mode-shadow .line-container.active .hl-blue {
+  color: #3b82f6;
+  font-weight: bold;
+}
+.line-mode-shadow .line-container.active .hl-green {
+  color: #10b981;
+  font-weight: bold;
+}
+.line-mode-shadow .line-container.active .hl-orange {
+  color: #f59e0b;
+  font-weight: bold;
+}
+.line-mode-shadow .line-container.active .hl-purple {
   color: #8b5cf6;
   font-weight: bold;
 }

@@ -63,13 +63,14 @@ fetch("data.json")
     });
 
     // ── Mode toggle ───────────────────────────────────────
-    let currentMode = "lines"; // 'lines' | 'paragraph' | 'en-only' | 'zh-only'
+    let currentMode = "highlight-mode"; // 'highlight-mode' | 'shadow-mode' | 'paragraph' | 'en-only' | 'zh-only'
 
     const modeBar = document.createElement("div");
     modeBar.id = "mode-bar";
     modeBar.innerHTML = `
       <div id="mode-toggle">
-        <button class="mode-btn active" data-mode="lines">Shadow Mode</button>
+        <button class="mode-btn active" data-mode="highlight-mode">Highlight Mode</button>
+        <button class="mode-btn" data-mode="shadow-mode">Shadow Mode</button>
         <button class="mode-btn" data-mode="paragraph">Retell Mode</button>
         <button class="mode-btn" data-mode="en-only">EN-only</button>
         <button class="mode-btn" data-mode="zh-only">ZH-only</button>
@@ -157,8 +158,15 @@ fetch("data.json")
 
     function renderContent(ep) {
       contentDiv.innerHTML = "";
+      contentDiv.classList.remove("line-mode-highlight", "line-mode-shadow");
 
-      if (currentMode === "lines") {
+      if (currentMode === "highlight-mode" || currentMode === "shadow-mode") {
+        contentDiv.classList.add(
+          currentMode === "highlight-mode"
+            ? "line-mode-highlight"
+            : "line-mode-shadow",
+        );
+
         ep.lines.forEach((line) => {
           const container = document.createElement("div");
           container.className = "line-container";
@@ -166,6 +174,13 @@ fetch("data.json")
             <div class="text-en">${clean(line.en)}</div>
             <div class="text-zh">${clean(line.zh)}</div>
           `;
+
+          if (currentMode === "shadow-mode") {
+            container.addEventListener("click", () => {
+              container.classList.toggle("active");
+            });
+          }
+
           contentDiv.appendChild(container);
         });
       } else if (currentMode === "paragraph") {
