@@ -63,15 +63,14 @@ fetch("data.json")
     });
 
     // ── Mode toggle ───────────────────────────────────────
-    let currentMode = "lines"; // 'lines' | 'paragraph' | 'chinese-only'
+    let currentMode = "lines"; // 'lines' | 'paragraph'
 
     const modeBar = document.createElement("div");
     modeBar.id = "mode-bar";
     modeBar.innerHTML = `
       <div id="mode-toggle">
-        <button class="mode-btn active" data-mode="lines">Line by Line</button>
-        <button class="mode-btn" data-mode="paragraph">Full Paragraph</button>
-        <button class="mode-btn" data-mode="chinese-only">Chinese Only</button>
+        <button class="mode-btn active" data-mode="lines">Shadow Mode</button>
+        <button class="mode-btn" data-mode="paragraph">Retell Mode</button>
       </div>
     `;
     playerBar.insertAdjacentElement("afterend", modeBar);
@@ -164,15 +163,8 @@ fetch("data.json")
         const zhText = ep.lines.map((l) => clean(l.zh)).join(" ");
         contentDiv.innerHTML = `
           <div class="para-block">
+            <p class="para-zh">${zhText}</p>
             <p class="para-en">${enText}</p>
-            <p class="para-zh">${zhText}</p>
-          </div>
-        `;
-      } else if (currentMode === "chinese-only") {
-        const zhText = ep.lines.map((l) => clean(l.zh)).join(" ");
-        contentDiv.innerHTML = `
-          <div class="para-block">
-            <p class="para-zh">${zhText}</p>
           </div>
         `;
       }
