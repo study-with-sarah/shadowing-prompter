@@ -8,6 +8,12 @@
   --header-margin-bottom: 14px;
   --line-gap: 8px;
   --line-padding-bottom: 14px;
+  --nav-height: 56px;
+  --mode-bar-height: 40px;
+  --audio-player-height: 56px;
+  --fixed-stack-height: calc(
+    var(--nav-height) + var(--mode-bar-height) + var(--audio-player-height)
+  );
 }
 
 /* ── Mode bar ───────────────────────────────────────── */
@@ -15,11 +21,9 @@
   position: fixed;
   left: 0;
   right: 0;
-  top: 56px; /* below nav */
+  top: var(--nav-height);
   background-color: #ffffff;
-  padding: 4px calc(var(--page-pad-x) + var(--content-inset-x));
-  margin: 8px 0;
-  border-bottom: 1px solid #f0f0f0;
+  padding: 8px calc(var(--page-pad-x) + var(--content-inset-x));
   z-index: 100;
 }
 #mode-toggle {
@@ -88,8 +92,8 @@ body {
   background-color: #ffffff;
   color: #333333;
   margin: 0;
-  padding: var(--page-pad-top) var(--page-pad-x) var(--page-pad-bottom)
-    var(--page-pad-x);
+  padding: calc(var(--fixed-stack-height) + var(--header-margin-top))
+    var(--page-pad-x) var(--page-pad-bottom) var(--page-pad-x);
 }
 
 /* 固定顶栏容器 */
@@ -109,12 +113,11 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  border-bottom: 1px solid #f0f0f0;
 }
 
 /* 音频播放器 */
 #audio-player {
-  top: 100px;
+  top: calc(var(--nav-height) + var(--mode-bar-height));
   display: flex;
   align-items: center;
   gap: 10px;

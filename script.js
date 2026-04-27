@@ -28,6 +28,29 @@ fetch("data.json")
     const audioTime = document.getElementById("audio-time");
     const audioSeek = document.getElementById("audio-seek");
 
+    function updateFixedLayout() {
+      const navHeight = nav.offsetHeight;
+      const modeBarHeight = modeBar.offsetHeight;
+      const audioHeight = playerBar.hidden ? 0 : playerBar.offsetHeight;
+
+      document.documentElement.style.setProperty(
+        "--nav-height",
+        `${navHeight}px`,
+      );
+      document.documentElement.style.setProperty(
+        "--mode-bar-height",
+        `${modeBarHeight}px`,
+      );
+      document.documentElement.style.setProperty(
+        "--audio-player-height",
+        `${audioHeight}px`,
+      );
+      document.documentElement.style.setProperty(
+        "--fixed-stack-height",
+        `${navHeight + modeBarHeight + audioHeight}px`,
+      );
+    }
+
     function fmtTime(s) {
       const m = Math.floor(s / 60);
       return `${m}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
@@ -119,6 +142,15 @@ fetch("data.json")
     });
     select.addEventListener("change", () => loadEpisode(Number(select.value)));
 
+    window.addEventListener("resize", updateFixedLayout);
+
+    if (typeof ResizeObserver !== "undefined") {
+      const fixedBarObserver = new ResizeObserver(updateFixedLayout);
+      fixedBarObserver.observe(nav);
+      fixedBarObserver.observe(modeBar);
+      fixedBarObserver.observe(playerBar);
+    }
+
     function loadEpisode(index) {
       currentIndex = index;
       const ep = data[index];
@@ -139,6 +171,8 @@ fetch("data.json")
         audio.src = "";
         playerBar.hidden = true;
       }
+
+      updateFixedLayout();
 
       // 渲染集标题
       header.innerHTML = `
